@@ -357,3 +357,43 @@ form hr {
     margin-top: 50px;
     width: 60%;
 }
+
+/* Add this CSS code to your styles.css or within a <style> tag in your HTML file */
+
+.weather-widget {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+    margin: auto;
+}
+
+.weather-widget h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.weather-widget h4 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.weather-widget p {
+    font-size: 14px;
+    color: #777;
+    margin-top: 10px;
+}
+
+/* Optional: Add some styling to make it visually appealing */
+
+.weather-widget {
+    transition: transform 0.3s ease-in-out;
+}
+
+.weather-widget:hover {
+    transform: scale(1.05);
+}

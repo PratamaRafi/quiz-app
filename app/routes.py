@@ -4,7 +4,9 @@ from werkzeug.urls import url_parse
 from app.forms import LoginForm, RegistrationForm, QuestionForm
 from app.models import User, Questions
 from app import db
+from weather import get_weather,convert_celcius
 
+url = "https://api.openweathermap.org/data/2.5/forecast?id=1642907&appid=de75017d49f58c3668b5fe5d1796913e"
 
 @app.before_request
 def before_request():
@@ -16,7 +18,11 @@ def before_request():
 
 @app.route('/')
 def home():
-    return render_template('index.html', title='Home')
+    weather_data,city = get_weather(url)
+    weather = weather_data["weather"][0]
+
+    temp_celcius = convert_celcius(weather_data["main"]["temp"])
+    return render_template('index.html',city_data=city, dt_txt=weather_data["dt_txt"],weather=weather,temp_celcius=temp_celcius,title='Home')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -64,7 +70,7 @@ def question(id):
     if request.method == 'POST':
         option = request.form['options']
         if option == q.ans:
-            session['marks'] += 10
+            session['marks'] += 20
         return redirect(url_for('question', id=(id+1)))
     form.options.choices = [(q.a, q.a), (q.b, q.b), (q.c, q.c), (q.d, q.d)]
     return render_template('question.html', form=form, q=q, title='Question {}'.format(id))
